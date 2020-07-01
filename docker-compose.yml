@@ -1,0 +1,18 @@
+version: "3"
+services:
+  notification:
+    build: ./notification
+    networks:
+      - event-streaming
+    ports:
+      - "7000:7000"  
+  customer-notification:
+    build: ./customer-notification
+    links:
+      - notification
+    networks:
+      - event-streaming
+    ports:
+      - "7001:7001"
+networks:
+  event-streaming:
